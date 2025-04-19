@@ -7,9 +7,11 @@ Built with the MERN stack: MongoDB, Express.js, React, Node.js
 
 MERN + Socket.io + TailwindCSS + Daisy UI
 
-
+![HomePage](https://github.com/user-attachments/assets/4cfb1664-5512-4980-81d3-7b775c57920d)
 
 ✨ Key Features
+
+![Chatbot_chat](https://github.com/user-attachments/assets/900ae88a-de4a-4cff-a90a-14923cf3224a)
 
 🧠 AI Companions (Echoes)
 
@@ -20,6 +22,12 @@ MERN + Socket.io + TailwindCSS + Daisy UI
   * 🖼️ Custom profile picture upload (via Cloudinary)
 
   * 🔒 Mark as Private (only visible to creator) or Public
+ 
+* 🧠 AI with Chat Memory:
+
+  * Remembers last 10+ messages in each conversation
+
+  * Context-aware responses feel consistent and natural
 
 * 🔁 Supports CRUD operations:
 
@@ -29,15 +37,11 @@ MERN + Socket.io + TailwindCSS + Daisy UI
 
   * 👁️ View (Read-only) a public chatbot’s info 
 
-* 🧠 AI with Chat Memory:
-
-  * Remembers last 10+ messages in each conversation
-
-  * Context-aware responses feel consistent and natural
-
 * 🎭 Built for role-play & personality customization
 
 * ⚡ Uses Groq's LLaMA 3 70B API for blazing-fast, realistic replies
+
+![User_chat](https://github.com/user-attachments/assets/ba020d45-d7cd-4a65-a999-bbf4133947b0)
 
 💬 Real-Time Chat
 
@@ -73,10 +77,55 @@ MERN + Socket.io + TailwindCSS + Daisy UI
 
 🏠 Homepage
 
-
+![Nomal User list](https://github.com/user-attachments/assets/e5865522-1523-451d-93e9-669640d6fd2c)
 
 ✨ Echo Pages
 
+Echo Create Page
+
+![New_Echo](https://github.com/user-attachments/assets/f73f9217-0405-4a46-8528-0ecf2485cc2a)
+
+Echo Info Page (Public)
+
+![Echo_infos](https://github.com/user-attachments/assets/ba2b506d-095b-48b7-9046-059218ae1622)
+
+Echo Config Page (Creator only)
+
+![EchoConfigPage](https://github.com/user-attachments/assets/f69e3178-a2f7-4821-a596-8e40e81ea9d7)
+
+Echo Delete box (Creator only)
+
+![Echo_Delete](https://github.com/user-attachments/assets/5a82684b-e408-4938-808a-ea6673003178)
+
+Echo Config and Delete button (Creator only)
+
+![Echo_config Buttons](https://github.com/user-attachments/assets/ea8c1358-0c47-4683-a5f8-da343836e623)
+
+Echo Info button (Everyone)
+
+![Echo_info Button](https://github.com/user-attachments/assets/35da178c-4ed1-4418-85ee-2149e81f3960)
+
+🔐 User Related Pages
+
+Signin Page
+
+![SigninPage](https://github.com/user-attachments/assets/c1a365a5-28e7-4ce1-be8e-44d3b6d61f39)
+
+Signup Page
+
+![SignupPage](https://github.com/user-attachments/assets/fc1e819a-8d2e-4700-9b0a-3c6d8f00177a)
+
+Profile Page
+
+![ProfilePage](https://github.com/user-attachments/assets/4e186ff5-38a2-407c-882b-eb6b47f3670e)
+
+Setting Page
+
+![Settings](https://github.com/user-attachments/assets/b3a86b90-668a-4972-94ed-1336cc1f9472)
+
+Online only box checked
+
+![User_online only](https://github.com/user-attachments/assets/0b526669-df39-4e87-9704-60a166fcfaee)
 
 
 ### 💼 About This Project
