@@ -1,9 +1,20 @@
 # 🤖 EchoChat — AI Companions for Real-Time Conversations
 Create lifelike AI companions and chat with them in real-time. EchoChat is a full-stack web app that lets users design role-based AI bots and talk to them instantly — just like texting a real person. Oh, and you can also message real users too.
 
-Built with the MERN stack: MongoDB, Express.js, React, Node.js
+## 🚀 Live Demo
+
+Try it here: [https://echo-chat-wizb.onrender.com](https://echo-chat-wizb.onrender.com)
+
+### 🧪 Sample Account
+
+Use this sample account to explore EchoChat without signing up:
+
+- **Email**: lee@gmail.com  
+- **Password**: 654321
 
 🌟 Tech Stack
+
+Built with the MERN stack: MongoDB, Express.js, React, Node.js
 
 MERN + Socket.io + TailwindCSS + Daisy UI
 
