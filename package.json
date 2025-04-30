@@ -1,0 +1,21 @@
+{
+  "name": "echochat-app",
+  "version": "1.0.0",
+  "description": "A MERN-based chat app where users can talk with AI characters or real people. Features roleplay bots powered by Groq LLaMA 3.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leonucn/Echo-chat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leonucn/Echo-chat/issues"
+  },
+  "homepage": "https://github.com/Leonucn/Echo-chat#readme"
+}
