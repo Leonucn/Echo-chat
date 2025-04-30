@@ -38,6 +38,10 @@ const ChatContainer = () => {
       messageEndRef.current.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const sortedMessages = [...messages].sort(
+    (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+  );
+
   if (isMessagesLoading) {
     return (
       <div className="flex-1 flex flex-col overflow-auto">
@@ -53,7 +57,7 @@ const ChatContainer = () => {
       <ChatHeader />
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((message) => (
+        {sortedMessages.map((message) => (
           <div
             key={message._id}
             className={`chat ${
