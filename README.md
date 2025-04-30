@@ -3,7 +3,7 @@ Create lifelike AI companions and chat with them in real-time. EchoChat is a ful
 
 ## 🚀 Live Demo
 
-Try it here: [https://echo-chat-wizb.onrender.com](https://echo-chat-wizb.onrender.com)
+🔗 [Live Demo Link](https://echo-chat-wizb.onrender.com)
 
 ### 🧪 Sample Account
 
