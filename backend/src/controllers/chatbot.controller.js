@@ -295,7 +295,7 @@ export const sendChatbotMessage = async (req, res) => {
     // Get AI response
     const completion = await groq.chat.completions.create({
       messages: messageHistory,
-      model: "llama3-8b-8192",
+      model: "llama-3.1-8b-instant",
       temperature: config.temperature,
       max_tokens: config.maxTokens,
     });

@@ -23,6 +23,7 @@ const Sidebar = () => {
 
   const { onlineUsers, authUser } = useAuthStore();
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
+  const [showMyEchosOnly, setShowMyEchosOnly] = useState(false);
 
   // Retrieve the last selected tab from local storage or default to "chatbots"
   const [activeTab, setActiveTab] = useState(() => {
@@ -47,6 +48,10 @@ const Sidebar = () => {
   const filteredUsers = showOnlineOnly
     ? users.filter((user) => onlineUsers.includes(user._id))
     : users;
+
+  const filteredChatbots = showMyEchosOnly
+    ? chatbots.filter((chatbot) => chatbot.userId?._id === currentUserId)
+    : chatbots;
 
   const handleDeleteClick = (chatbotId, e) => {
     e.stopPropagation();
@@ -173,52 +178,120 @@ const Sidebar = () => {
 
         {/* Chatbots Section */}
         {activeTab === "chatbots" && (
-          <div className="mt-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Bot className="size-6 ml-5" />
-              <span className="font-medium hidden lg:block">Echos</span>
+          <>
+            <div className="border-b border-base-300 w-full p-5">
+              <div className="flex items-center gap-2">
+                <Bot className="size-6" />
+                <span className="font-medium hidden lg:block">Echos</span>
+              </div>
+              {/* My Echos filter toggle */}
+              <div className="mt-3 hidden lg:flex items-center gap-2">
+                <label className="cursor-pointer flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={showMyEchosOnly}
+                    onChange={(e) => setShowMyEchosOnly(e.target.checked)}
+                    className="checkbox checkbox-sm"
+                  />
+                  <span className="text-sm">Show My Echos only</span>
+                </label>
+                <span className="text-xs text-zinc-500">
+                  (
+                  {
+                    chatbots.filter(
+                      (chatbot) => chatbot.userId?._id === currentUserId
+                    ).length
+                  }{" "}
+                  owned)
+                </span>
+              </div>
             </div>
-            {chatbots.length === 0 ? (
-              <div className="text-center text-zinc-500 py-4">No chatbots</div>
-            ) : (
-              chatbots.map((chatbot) => (
-                <div key={chatbot._id} className="group relative">
-                  <button
-                    onClick={() => {
-                      setSelectedUser(null);
-                      setSelectedChatBot(chatbot);
-                    }}
-                    className={`w-full p-3 flex items-center gap-3 hover:bg-base-300 transition-colors ${
-                      selectedChatBot?._id === chatbot._id
-                        ? "bg-base-300 ring-1 ring-base-300"
-                        : ""
-                    }`}
-                  >
-                    <div className="relative mx-auto lg:mx-0">
-                      <img
-                        src={chatbot.profilePic || "/avatar.png"}
-                        alt={chatbot.name}
-                        className="size-12 object-cover rounded-full"
-                      />
-                    </div>
-                    <div className="hidden lg:block text-left min-w-0">
-                      <div className="font-medium truncate">{chatbot.name}</div>
-                      <div className="text-sm text-zinc-400">
-                        {chatbot.occupation}
-                      </div>
-                    </div>
-                  </button>
 
-                  {/* Action Buttons - Only visible on hover */}
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 hidden group-hover:flex items-center gap-3">
-                    {chatbot.userId?._id === currentUserId ? (
-                      // Config Button for the creator
-                      <>
+            <div className="overflow-y-auto w-full py-3">
+              {filteredChatbots.length === 0 ? (
+                <div className="text-center text-zinc-500 py-4">
+                  {showMyEchosOnly ? "No Echos created by you" : "No chatbots"}
+                </div>
+              ) : (
+                filteredChatbots.map((chatbot) => (
+                  <div key={chatbot._id} className="group relative">
+                    <button
+                      onClick={() => {
+                        setSelectedUser(null);
+                        setSelectedChatBot(chatbot);
+                      }}
+                      className={`w-full p-3 flex items-center gap-3 hover:bg-base-300 transition-colors ${
+                        selectedChatBot?._id === chatbot._id
+                          ? "bg-base-300 ring-1 ring-base-300"
+                          : ""
+                      }`}
+                    >
+                      <div className="relative mx-auto lg:mx-0">
+                        <img
+                          src={chatbot.profilePic || "/avatar.png"}
+                          alt={chatbot.name}
+                          className="size-12 object-cover rounded-full"
+                        />
+                      </div>
+                      <div className="hidden lg:block text-left min-w-0">
+                        <div className="font-medium truncate">
+                          {chatbot.name}
+                        </div>
+                        <div className="text-sm text-zinc-400">
+                          {chatbot.occupation}
+                        </div>
+                      </div>
+                    </button>
+
+                    {/* Action Buttons - Only visible on hover */}
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 hidden group-hover:flex items-center gap-3">
+                      {chatbot.userId?._id === currentUserId ? (
+                        // Config Button for the creator
+                        <>
+                          <button
+                            className="relative size-8 hover:scale-110 transition-transform"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(`/echo/edit/${chatbot._id}`);
+                            }}
+                          >
+                            <svg
+                              viewBox="0 0 100 100"
+                              className="size-full fill-none stroke-2"
+                            >
+                              <path
+                                d="M50 0 L93.3 25 L93.3 75 L50 100 L6.7 75 L6.7 25 Z"
+                                className="stroke-base-content"
+                              />
+                            </svg>
+                            <Settings className="size-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                          </button>
+
+                          {/* Delete Button */}
+                          <button
+                            className="relative size-8 hover:scale-110 transition-transform"
+                            onClick={(e) => handleDeleteClick(chatbot._id, e)}
+                            disabled={isDeletingChatBot}
+                          >
+                            <svg
+                              viewBox="0 0 100 100"
+                              className="size-full fill-none stroke-2"
+                            >
+                              <path
+                                d="M50 0 L93.3 25 L93.3 75 L50 100 L6.7 75 L6.7 25 Z"
+                                className="stroke-base-content"
+                              />
+                            </svg>
+                            <Trash2 className="size-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-red-500" />
+                          </button>
+                        </>
+                      ) : (
+                        // Info Button for non-creators
                         <button
                           className="relative size-8 hover:scale-110 transition-transform"
                           onClick={(e) => {
                             e.stopPropagation();
-                            navigate(`/echo/edit/${chatbot._id}`);
+                            navigate(`/echo/${chatbot._id}`);
                           }}
                         >
                           <svg
@@ -230,53 +303,15 @@ const Sidebar = () => {
                               className="stroke-base-content"
                             />
                           </svg>
-                          <Settings className="size-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                          <Info className="size-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                         </button>
-
-                        {/* Delete Button */}
-                        <button
-                          className="relative size-8 hover:scale-110 transition-transform"
-                          onClick={(e) => handleDeleteClick(chatbot._id, e)}
-                          disabled={isDeletingChatBot}
-                        >
-                          <svg
-                            viewBox="0 0 100 100"
-                            className="size-full fill-none stroke-2"
-                          >
-                            <path
-                              d="M50 0 L93.3 25 L93.3 75 L50 100 L6.7 75 L6.7 25 Z"
-                              className="stroke-base-content"
-                            />
-                          </svg>
-                          <Trash2 className="size-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-red-500" />
-                        </button>
-                      </>
-                    ) : (
-                      // Info Button for non-creators
-                      <button
-                        className="relative size-8 hover:scale-110 transition-transform"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(`/echo/${chatbot._id}`);
-                        }}
-                      >
-                        <svg
-                          viewBox="0 0 100 100"
-                          className="size-full fill-none stroke-2"
-                        >
-                          <path
-                            d="M50 0 L93.3 25 L93.3 75 L50 100 L6.7 75 L6.7 25 Z"
-                            className="stroke-base-content"
-                          />
-                        </svg>
-                        <Info className="size-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-                      </button>
-                    )}
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))
-            )}
-          </div>
+                ))
+              )}
+            </div>
+          </>
         )}
       </aside>
 
